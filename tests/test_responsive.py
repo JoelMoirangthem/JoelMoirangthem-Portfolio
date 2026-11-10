@@ -80,6 +80,11 @@ with sync_playwright() as p:
         d = pg.evaluate("""() => { const u = document.querySelector('.unit').getBoundingClientRect(); return { w: u.width, h: u.height, hdr: document.getElementById('hdr').offsetHeight }; }""")
         check(d["w"] >= 100, f"{tag}: doors only {d['w']:.0f}px wide")
         check(pg.evaluate("document.querySelector('.paint').classList.contains('in')"), f"{tag}: doors heading never revealed")
+        ph = pg.evaluate("""() => { const p = document.querySelector('.paint'), rg = document.createRange(); rg.selectNodeContents(p);
+            const ls = [...rg.getClientRects()].filter(q => q.width > 1); return { lines: new Set(ls.map(q => Math.round(q.top))).size, right: Math.max(...ls.map(q => q.right)) }; }""")
+        check(ph["right"] <= w - 8, f"{tag}: doors heading runs off the screen (right {ph['right']:.0f})")
+        if w < 640:
+            check(ph["lines"] == 2, f"{tag}: doors heading should be 2 lines (Magic happens / behind the doors), got {ph['lines']}")
         check(d["h"] <= h - d["hdr"] + 2, f"{tag}: a door ({d['h']:.0f}px) is taller than the screen below the header")
         # story header fits
         pg.evaluate("window.scrollTo(0, document.querySelector('#about').getBoundingClientRect().top + scrollY + innerHeight * .8)")
@@ -115,3 +120,4 @@ with sync_playwright() as p:
 
 print(f"\n{len(fails)} failure(s)")
 sys.exit(1 if fails else 0)
+
