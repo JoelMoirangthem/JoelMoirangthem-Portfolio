@@ -38,7 +38,7 @@ html[data-mode="dark"] .story__when{color:#D9C6C6}
 .story__rw{width:1.25rem;height:1.25rem;color:rgba(var(--fg-rgb),.6);transform:rotate(calc(var(--p,0) * -720deg))}
 .story__bar{position:relative;flex:0 1 11rem;height:2px;margin-left:.6rem;border-radius:2px;background:rgba(var(--fg-rgb),.12);overflow:hidden}
 .story__bar b{position:absolute;inset:0;background:var(--foreground);transform-origin:0 50%;transform:scaleX(var(--p,0))}
-.story__line{position:relative;padding-top:24vh;padding-bottom:4vh}
+.story__line{position:relative;padding-top:24vh;padding-bottom:45svh}
 .story__list{position:relative;padding-left:2.75rem}
 .story__rail{position:absolute;left:.45rem;top:var(--r0,0);height:var(--rh,0);width:2px;border-radius:2px;background:rgba(var(--fg-rgb),.14)}
 .story__ttrack{position:absolute;left:calc(.45rem + 1px - 1.25rem);width:2.5rem;top:var(--r0,0);height:var(--rh,0);overflow:clip;pointer-events:none;z-index:1}
@@ -57,7 +57,8 @@ html[data-mode="dark"] .story__when{color:#D9C6C6}
 .ch__b{display:flex;flex-direction:column;gap:.55rem;max-width:46ch}
 .ch__b li{position:relative;padding-left:1.1rem;font-size:1rem;line-height:1.55;color:rgba(var(--fg-rgb),.86)}
 .ch__b li::before{content:"";position:absolute;left:0;top:.72em;width:.45rem;height:1.5px;background:rgba(var(--fg-rgb),.45)}
-@media (max-width:767.98px){
+/* the top-bar layout is for narrow portrait screens only; a phone on its side keeps the two-column layout */
+@media (max-width:767.98px) and (orientation:portrait){
   .story__pin{padding:0 0 1.5rem}
   .story__stage{grid-template-columns:1fr;gap:0}
   .story__clock{top:0;height:auto;margin:0 -1.25rem;padding:calc(var(--hdr-h,4.4rem) + 1rem) 1.25rem .9rem;z-index:3;justify-content:flex-start;
@@ -76,3 +77,15 @@ html[data-mode="dark"] .story__when{color:#D9C6C6}
   .ch__b li{font-size:.9375rem}
 }
 @media (prefers-reduced-motion:reduce){.ch{opacity:1}.story__bg{display:none}.story__amb i{animation:none}}
+/* short landscape: shrink the sticky year column so it fits the screen height */
+@media (max-height:540px) and (orientation:landscape){
+  .story__clock{margin-top:0;padding-top:var(--hdr-h,4.4rem);justify-content:center}
+  .story__pin{padding-top:0}
+  .story__h{font-size:clamp(1.4rem,7vh,2.4rem)}
+  .story__yr{margin-top:.5rem;font-size:clamp(3rem,19vh,6rem)}
+  .story__when{margin-top:.4rem}
+  .story__meter{margin-top:.6rem}
+  .story__line{padding-top:calc(var(--hdr-h,4.4rem) + 2rem)}
+  .ch{padding:1.75rem 0}
+  .ch__t{font-size:1.5rem}
+}

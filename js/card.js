@@ -49,7 +49,7 @@
     t0 = performance.now();
     if (!raf) raf = requestAnimationFrame(loop);
     window.addEventListener('deviceorientation', orient);
-    setTimeout(function () { hc.focus(); }, 350);
+    setTimeout(function () { hc.focus({ focusVisible: false }); }, 350);
   }
   function close() {
     if (holo.hidden) return;

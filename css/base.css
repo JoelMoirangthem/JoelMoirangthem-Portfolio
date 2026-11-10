@@ -57,10 +57,10 @@ svg{display:block;width:1em;height:1em;flex:none}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
-@media (max-width:1920px){html{font-size:.833333vw}}
-@media (max-width:1440px){html{font-size:1.111111vw}}
-@media (max-width:1024px){html{font-size:1.5625vw}}
-@media (max-width:640px){html{font-size:4.444444vw}}
+/* One continuous root size: grows gently with width (14px phone -> 16px laptop), shrinks on short
+   landscape screens via the vh term, and scales up past 1920px. No breakpoint jumps. */
+html{font-size:clamp(13px,min(12.5px + .42vw,3.5vh),16px)}
+@media (min-width:1921px){html{font-size:max(16px,min(calc(16px + (100vw - 1920px) * .00546),1.4vh))}}
 
 .shell{max-width:var(--container-shell);margin-inline:auto;padding-inline:1.25rem;width:100%}
 @media (min-width:640px){.shell{padding-inline:2rem}}

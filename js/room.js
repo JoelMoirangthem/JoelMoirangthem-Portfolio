@@ -114,7 +114,7 @@
     var scr = img.parentNode;
     if (img.complete && img.naturalWidth) return;
     scr.classList.add('skel');
-    img.addEventListener('load', function () { scr.classList.remove('skel'); measure(); }, { once: true });
+    img.addEventListener('load', function () { scr.classList.remove('skel'); fitCards(); measure(); }, { once: true });
     img.addEventListener('error', function () { scr.classList.remove('skel'); }, { once: true });
   });
 
@@ -126,11 +126,20 @@
 
   /* stacking: the covered card shrinks to 94% and dims to .28 */
   var ticking = false;
+  /* Sticky stacking only works for a card that fits below the header; taller cards scroll normally. */
+  function fitCards() {
+    var navH = rn.offsetHeight;
+    cards.forEach(function (c, i) {
+      c.classList.remove('card--free');
+      var stickTop = navH + (window.innerWidth < 900 ? 10 + i * 10 : 16 + i * 14);
+      c.classList.toggle('card--free', c.offsetHeight > window.innerHeight - stickTop - 8);
+    });
+  }
   function stackFx() {
     ticking = false;
     cards.forEach(function (c, i) {
       var next = cards[i + 1], p = 0;
-      if (next) {
+      if (next && !c.classList.contains('card--free')) {
         var top = parseFloat(getComputedStyle(c).top), h = c.offsetHeight;
         p = JM.clamp((top + h - next.getBoundingClientRect().top) / h, 0, 1);
       }
@@ -142,7 +151,7 @@
     totopFx();
   }
   window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(stackFx); } }, { passive: true });
-  window.addEventListener('resize', function () { measure(); stackFx(); });
+  window.addEventListener('resize', function () { fitCards(); measure(); stackFx(); });
 
   /* auto-scrolling screenshots inside each screen */
   var SPEED = 230, REST = 1100, live = !embed, pans = [];
@@ -199,6 +208,6 @@
     else if (m.wall === 'reset') { window.scrollTo(0, 0); pans.forEach(function (s) { s.pos = 0; s.dir = 1; s.wait = REST; s.img.style.transform = ''; }); }
   });
 
-  measure(); stackFx(); requestAnimationFrame(pan);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); stackFx(); });
+  fitCards(); measure(); stackFx(); requestAnimationFrame(pan);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { fitCards(); measure(); stackFx(); });
 })();

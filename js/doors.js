@@ -6,7 +6,10 @@
   var info = document.getElementById('dinfo'), cursor = document.getElementById('doorCursor'), wallv = document.getElementById('wallv');
   var paintEl = sec.querySelector('.paint'), dots = sec.querySelectorAll('.doors__dots i');
   var hdr = document.getElementById('hdr');
-  var D = C.doors, ANG = 70, mobileMq = window.matchMedia('(max-width:639.98px)');
+  /* keep identical to the compact media query in css/doors.css */
+  var DOORS_COMPACT = '(max-width:639.98px),(max-height:540px) and (orientation:landscape)';
+  var D = C.doors, ANG = 70, mobileMq = window.matchMedia(DOORS_COMPACT);
+  var landMq = window.matchMedia('(max-height:540px) and (orientation:landscape)');
 
   row.innerHTML = D.map(function (d, i) {
     var secret = i === 4;
@@ -42,16 +45,19 @@
     s.el.style.setProperty('--o', Math.max(0, s.x).toFixed(3));
   }
 
-  /* ---------- entrance reveal ---------- */
+  /* ---------- entrance reveal ----------
+     Observe the wall, not the heading: the heading starts fully clipped (clip-path inset 100%),
+     which IntersectionObserver reports as 0 visible area, so it would never reveal. */
+  var wallEl = paintEl.parentNode;
   var io = new IntersectionObserver(function (es) {
     es.forEach(function (e) {
       if (!e.isIntersecting) return;
-      if (e.target === paintEl) { paintEl.classList.add('in'); paintEl.classList.remove('pre'); }
+      if (e.target === wallEl) { paintEl.classList.add('in'); paintEl.classList.remove('pre'); }
       else units.forEach(function (u) { u.classList.remove('pre'); });
       io.unobserve(e.target);
     });
   }, { threshold: 0.2 });
-  io.observe(paintEl); io.observe(row);
+  io.observe(wallEl); io.observe(row);
 
   /* ---------- room iframes ---------- */
   var frames = [];
@@ -270,8 +276,14 @@
   var mCur = 0, mTarget = 0, mRaf = 0, mLast = 0, snapT = 0, finger = false, swipeLock = 0, mIdx = -1;
   function mobileLayout() {
     if (!mobileMq.matches) { row.style.removeProperty('--uw'); row.style.transform = sec.classList.contains('reveal') ? row.style.transform : ''; return; }
-    var pin = sec.querySelector('.doors__pin'), avail = pin.clientHeight - row.getBoundingClientRect().top + pin.getBoundingClientRect().top - 40;
-    var uw = Math.max(110, Math.min(window.innerWidth * 0.6, avail / 2.25));
+    var pin = sec.querySelector('.doors__pin'), track = row.parentNode, uw;
+    if (landMq.matches) {
+      var availH = pin.clientHeight - parseFloat(getComputedStyle(pin).paddingTop) - 48;
+      uw = Math.max(90, Math.min(track.clientWidth * 0.62, availH / 2.25));
+    } else {
+      var avail = pin.clientHeight - row.getBoundingClientRect().top + pin.getBoundingClientRect().top - 40;
+      uw = Math.max(110, Math.min(window.innerWidth * 0.6, avail / 2.25));
+    }
     row.style.setProperty('--uw', uw + 'px');
     sec.classList.toggle('compact', uw < 150);
   }
@@ -325,6 +337,7 @@
     }
   }, { passive: true });
   mobileMq.addEventListener('change', function () { mobileLayout(); mIdx = -1; mKick(); if (!mobileMq.matches) row.style.transform = ''; });
+  landMq.addEventListener('change', function () { mobileLayout(); mIdx = -1; mKick(); });
   window.addEventListener('resize', function () { mobileLayout(); mKick(); if (active >= 0 && !busy) placeInfo(active); });
   mobileLayout(); mKick();
   if (mobileMq.matches) fillInfo(0);

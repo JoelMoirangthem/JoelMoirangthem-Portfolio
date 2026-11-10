@@ -19,23 +19,40 @@
   function rem(n) { return n * parseFloat(getComputedStyle(document.documentElement).fontSize); }
 
   function layout() {
-    var vw = window.innerWidth, vh = window.innerHeight, off;
-    if (vw >= 1024) { L = JM.clamp(vh * 0.3, 190, 270); EXT_MAX = 72; thick = 3.7; knobS = 1.3; off = rem(4.25); }
-    else if (vw >= 640) { L = JM.clamp(vh * 0.2, 160, 220); EXT_MAX = 62; thick = 3.4; knobS = 1.2; off = rem(5.9); }
-    else { L = 70; EXT_MAX = 54; thick = 3.1; knobS = 1.1; off = rem(5.7); }
-    var clock = document.querySelector('.clock');
-    if (clock && clock.offsetParent) {
-      var r = clock.getBoundingClientRect();
-      off = vw >= 1200 ? Math.max(rem(1.2), vw - r.right - rem(1.4)) : (vw - r.left) + rem(1.4);
+    var vw = window.innerWidth, vh = window.innerHeight, maxL;
+    if (vw >= 1024 && vh > 540) { maxL = JM.clamp(vh * 0.3, 190, 270); EXT_MAX = 72; thick = 3.7; knobS = 1.3; }
+    else if (vw >= 640 && vh > 540) { maxL = JM.clamp(vh * 0.2, 160, 220); EXT_MAX = 62; thick = 3.4; knobS = 1.2; }
+    else { maxL = 70; EXT_MAX = 54; thick = 3.1; knobS = 1.1; }
+    /* Hang in a free gap of the header, never through a button: between the menu button and the
+       clock when both show (narrow screens), otherwise just right of the clock (wide screens). */
+    var clock = document.querySelector('.clock'), menu = document.getElementById('menuBtn');
+    var cr = clock && clock.offsetParent ? clock.getBoundingClientRect() : null;
+    var mr = menu && menu.offsetParent ? menu.getBoundingClientRect() : null;
+    var x = vw - rem(4.25);
+    if (cr && mr && mr.right + 24 < cr.left) {
+      x = (mr.right + cr.left) / 2;
+      /* if hero text sits under the middle of the gap, slide right past it while still inside the gap */
+      var hl = document.querySelector('.hero__left'), hr = hl && hl.getBoundingClientRect();
+      if (hr && x > hr.left - 40 && x < hr.right + 40 && hr.right + 48 < cr.left - 16) x = Math.max(x, hr.right + 48);
     }
-    W = Math.min(vw, 340);
+    else if (cr) x = Math.min(vw - 14, cr.right + rem(1.4));
+    /* Rope length: the knob stops above the first hero text that sits under it, and below the header row. */
+    var hdrB = cr ? cr.bottom : rem(4.5), stop = vh * 0.45;
+    ['.eyebrow', '.h1', '.cal'].forEach(function (s) {
+      var e = document.querySelector(s); if (!e) return;
+      var r = e.getBoundingClientRect(), top = r.top + window.scrollY;
+      if (r.width && x > r.left - 40 && x < r.right + 40) stop = Math.min(stop, top);
+    });
+    L = Math.max(hdrB + 6 - 24 * knobS, Math.min(maxL, stop - 12 - 46 * knobS));
+    W = vw;
     HIDDEN = EXT_MAX + 18;
     H = L + EXT_MAX + 170;
     seg = (L + HIDDEN) / N;
     dpr = Math.min(window.devicePixelRatio || 1, 2);
+    box.style.width = W + 'px';
     box.style.height = H + 'px';
     cv.width = W * dpr; cv.height = H * dpr;
-    var nax = JM.clamp(W - off, 20, W - 20);
+    var nax = JM.clamp(x, 20, W - 20);
     if (pts.length && ax !== undefined) {
       var dx = nax - ax;
       for (var i = 0; i < pts.length; i++) { pts[i].x += dx; prv[i].x += dx; }
@@ -319,6 +336,7 @@
   init();
   JM.onIntro(function () {
     setTimeout(function () {
+      layout();
       dropped = true;
       for (var i = 1; i <= N; i++) prv[i].x = pts[i].x + 2.2 * (i / N);
       wake();

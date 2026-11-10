@@ -58,7 +58,7 @@ html[data-mode="dark"] .sf{--sf-bg:#0F0E0E}
 .close-btn{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;padding:0 1.1rem;border-radius:var(--radius-control);border:1px solid rgba(255,255,255,.15);font-size:.875rem;font-weight:500;text-transform:uppercase;letter-spacing:.05em}
 .close-btn:hover{background:rgba(255,255,255,.06)}
 .navm__list{flex:1;display:flex;flex-direction:column;justify-content:center;gap:.25rem;overflow:auto}
-.navm__list button{display:flex;align-items:baseline;gap:1rem;font-size:2.25rem;font-weight:600;letter-spacing:-.02em;line-height:1.15;text-align:left;color:rgba(255,255,255,.72);
+.navm__list button{display:flex;align-items:baseline;gap:1rem;min-height:44px;font-size:2.25rem;font-weight:600;letter-spacing:-.02em;line-height:1.15;text-align:left;color:rgba(255,255,255,.72);
   opacity:0;transform:translateY(1rem);transition:opacity .5s var(--e-soft) var(--d),transform .5s var(--e-soft) var(--d),color .2s}
 @media (min-width:640px){.navm__list button{font-size:3.75rem}}
 .navm.open .navm__list button{opacity:1;transform:none}
