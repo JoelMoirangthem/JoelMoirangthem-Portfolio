@@ -1,0 +1,26 @@
+# Render Blueprint: static site, no build step.
+# Render dashboard -> New -> Blueprint -> pick this repo.
+services:
+  - type: web
+    name: joel-portfolio
+    runtime: static
+    buildCommand: echo "Static site, nothing to build"
+    staticPublishPath: .
+    pullRequestPreviewsEnabled: true
+    headers:
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
+      # The rooms load inside the home page as same-origin iframes; block framing by other sites.
+      - path: /*
+        name: Content-Security-Policy
+        value: "frame-ancestors 'self'"
+      - path: /*
+        name: Permissions-Policy
+        value: "camera=(), microphone=(), geolocation=()"
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=604800

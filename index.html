@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moirangthem Joel Singh — Full-Stack & AI Developer</title>
+<meta name="description" content="Joel Moirangthem, Computer Science engineer building full-stack web apps and approval-gated AI agents. SDE at Healtine.com, ex-SDE intern at DevOpsGenie AI.">
+<meta name="theme-color" content="#EEEAE6">
+<meta property="og:title" content="Moirangthem Joel Singh — Full-Stack & AI Developer">
+<meta property="og:description" content="Full-stack web apps and approval-gated AI agents.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap" rel="stylesheet">
+<script>try{if(localStorage.getItem('jm-mode')==='dark')document.documentElement.dataset.mode='dark'}catch(e){}</script>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/doors.css">
+<link rel="stylesheet" href="css/story.css">
+<link rel="stylesheet" href="css/overlays.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="ld__bg"></div>
+  <div class="ld__stack">
+    <div class="ld__pill" style="--k:0;--c:#1F1C1C;--t:#E8E4E0;--dir:1"><span>Joel Moirangthem</span></div>
+    <div class="ld__pill" style="--k:1;--c:#22304a;--t:#E8E4E0;--dir:-1"><span>Full-stack development</span></div>
+    <div class="ld__pill" style="--k:2;--c:#4a3540;--t:#E8E4E0;--dir:1"><span>AI agents</span></div>
+    <div class="ld__pill" style="--k:3;--c:#7a8670;--t:#F3EEEC;--dir:-1"><span>Backend & APIs</span></div>
+    <div class="ld__pill" style="--k:4;--c:#a4552c;--t:#F3EEEC;--dir:1"><span>Problem solving</span></div>
+    <div class="ld__pill" style="--k:5;--c:#C4B0B0;--t:#1A1818;--dir:-1"><span>Achievements</span></div>
+  </div>
+  <div class="ld__hud">
+    <div class="ld__top"><span><b>Joel Moirangthem</b> · Portfolio</span><span>Full-stack · AI agents · Backend · DSA</span></div>
+    <div class="ld__bot">
+      <p class="ld__num"><small>Opening up the work</small><span id="ldCount">000</span></p>
+      <div class="ld__bar"><i></i></div>
+    </div>
+  </div>
+</div>
+
+<header class="hdr rv" id="hdr">
+  <div class="shell hdr__in">
+    <nav aria-label="Main">
+      <ul class="nav">
+        <li><button data-go="home" aria-current="page"><span>Home</span></button></li>
+        <li><button data-door="0"><span>Full-Stack</span></button></li>
+        <li><button data-door="1"><span>AI Agents</span></button></li>
+        <li><button data-door="2"><span>Backend & APIs</span></button></li>
+        <li><button data-door="3"><span>Problem Solving</span></button></li>
+        <li><button data-go="about"><span>My story</span></button></li>
+        <li><button data-contact><span>Contact</span></button></li>
+      </ul>
+    </nav>
+    <div class="hdr__right">
+      <div class="chip clock" aria-label="Joel's local time in India">
+        <span class="clock__lbl">Local time</span>
+        <span class="clock__time" data-time>9:41am</span>
+        <span class="clock__sep" aria-hidden="true">•</span>
+        <span class="clock__date" data-date>10 November, 2026</span>
+      </div>
+      <button class="chip menu-btn" id="menuBtn" aria-haspopup="dialog" aria-controls="navm" aria-expanded="false">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span class="word">Menu</span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="cord" id="cord">
+  <canvas class="cord__cv" id="cordCv"></canvas>
+  <button class="cord__hit" id="cordHit" role="switch" aria-checked="false" aria-label="Dark mode (pull the cord)"></button>
+</div>
+
+<main id="main">
+  <section class="hero" id="home" aria-label="Introduction">
+    <div class="hero__vig"></div>
+    <div class="hero__stage">
+      <div class="fig" id="fig" role="button" tabindex="-1" aria-label="Open my ability card">
+        <div class="fig__frame">
+          <img id="figBase" class="fig__img" src="assets/portrait.webp" alt="Portrait of Joel Moirangthem" width="801" height="1033" decoding="async">
+          <canvas id="figCanvas" aria-hidden="true"></canvas>
+        </div>
+        <button class="fig__card" id="holoOpen" type="button">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1c1.1 6.9 4 9.8 11 11-7 1.2-9.9 4.1-11 11-1.1-6.9-4-9.8-11-11 7-1.2 9.9-4.1 11-11Z"/></svg>
+          My ability card
+        </button>
+      </div>
+    </div>
+    <div class="shell hero__content">
+      <div class="hero__left">
+        <p class="eyebrow rv" style="--d:200ms">Full-Stack & AI Developer</p>
+        <h1 class="h1">
+          <span class="sr-only">Hi, I'm Joel. I am a full-stack developer, AI agent builder, backend engineer and problem solver.</span>
+          <span aria-hidden="true">
+            <span class="line"><span style="--d:250ms">Hi, I'm Joel.</span></span>
+            <span class="line"><span class="soft" style="--d:370ms">I am a</span></span>
+            <span class="cal-line"><span class="cal rv" id="cal" style="--d:520ms"></span></span>
+          </span>
+        </h1>
+        <div class="ctas rv" style="--d:750ms">
+          <button class="pill pill--dark pill--arrow" data-contact><span class="pill__in">Hire me<span class="pill__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+          <button class="pill pill--outline" data-go="works"><span class="pill__in">See my work</span></button>
+        </div>
+        <div class="hero__links rv" style="--d:850ms" id="heroLinks"></div>
+      </div>
+    </div>
+    <div class="shell hero__bar rv">
+      <span>Open to SDE roles</span>
+      <span class="mid">Lucknow, India · Remote-friendly</span>
+      <span class="scroll">Scroll to explore <i aria-hidden="true">↓</i></span>
+    </div>
+  </section>
+
+  <section class="doors" id="works" aria-labelledby="doorsTitle">
+    <div class="doors__tex"></div>
+    <div class="doors__pin">
+      <div class="shell doors__wall">
+        <h2 class="sr-only" id="doorsTitle">My work, one door per skill</h2>
+        <p class="paint pre" aria-hidden="true">Magic happens <br class="mbr">behind the doors</p>
+        <div class="dinfo" id="dinfo" aria-live="polite"><h3 class="dinfo__h"></h3><p class="dinfo__t"></p><ul class="dinfo__p"></ul></div>
+        <p class="doors__dots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></p>
+        <ul class="doors__row" id="doorsRow"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="story" id="about" aria-labelledby="storyTitle" data-ch="0">
+    <div class="story__amb" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="story__pin">
+      <div class="shell story__stage">
+        <div class="story__clock">
+          <canvas class="story__bg" id="storyBg" aria-hidden="true"></canvas>
+          <p class="eyebrow">My story</p>
+          <h2 class="story__h" id="storyTitle">Let's go back in time.</h2>
+          <p class="story__yr" id="storyYr" aria-hidden="true"></p>
+          <p class="story__when" id="storyWhen"></p>
+          <div class="story__meter" aria-hidden="true">
+            <svg class="story__rw" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 2"/></svg>
+            <span id="storyCount">01</span><span class="story__of" id="storyOf">/ 04</span><i class="story__bar"><b></b></i>
+          </div>
+        </div>
+        <div class="story__line">
+          <span class="story__rail"></span>
+          <span class="story__ttrack"><span class="story__tail"></span></span>
+          <span class="story__dtrack"><span class="story__dot"></span></span>
+          <ol class="story__list" id="storyList"></ol>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="sfw">
+  <footer class="sf" id="contact-footer">
+    <div class="sf__in">
+      <p class="sf__eye"><i></i>Open to SDE roles & freelance work</p>
+      <h2 class="sf__h">Need something built? <span>Let's make it happen.</span></h2>
+      <p class="sf__p">I build full-stack products and AI agents that ship. Tell me what you need, a role, a project or a collaboration, and I'll get back to you within a day.</p>
+      <div class="sf__cta">
+        <button class="sf__btn" data-contact>Hire me <b><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></b></button>
+        <button class="sf__ghost" data-go="works">See my work</button>
+      </div>
+      <div class="sf__cols">
+        <div><h3>Work</h3><ul class="work" id="footWork"></ul></div>
+        <div><h3>Navigate</h3><ul>
+          <li><a href="#home" data-go="home">Home</a></li>
+          <li><a href="#about" data-go="about">My story</a></li>
+          <li><button data-contact>Contact</button></li>
+        </ul></div>
+        <div><h3>Elsewhere</h3><ul id="footLinks"></ul></div>
+      </div>
+      <div class="sf__bot">
+        <span>© <span data-fyear>2026</span> Moirangthem Joel Singh. Design inspired by <a href="https://therishithakor.com" target="_blank" rel="noopener">Rishi Thakor</a>.</span>
+        <span>Local time <span data-ftime>9:41am</span></span>
+        <button data-go="home">Back to top ↑</button>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<button class="totop" id="totop" aria-label="Back to top">
+  <span class="totop__lbl">Back to top</span>
+  <span class="totop__ring">
+    <svg class="r" viewBox="0 0 52 52" aria-hidden="true"><circle class="bg" cx="26" cy="26" r="24"/><circle class="fg" cx="26" cy="26" r="24"/></svg>
+    <svg class="a" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+  </span>
+</button>
+
+<div class="door-cursor" id="doorCursor" aria-hidden="true">Click to enter</div>
+<div class="wallv" id="wallv"></div>
+
+<div class="navm" id="navm" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="shell navm__top">
+    <span class="brand"><svg viewBox="0 0 48 48" fill="currentColor" aria-hidden="true"><path d="M24 2c2.2 13.8 7.9 19.6 22 22-14.1 2.4-19.8 8.2-22 22-2.2-13.8-7.9-19.6-22-22 14.1-2.4 19.8-8.2 22-22Z"/></svg>Joel</span>
+    <button class="close-btn" id="navClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Close</button>
+  </div>
+  <div class="shell navm__list" id="navList"></div>
+  <div class="shell navm__bot"><span>Local time — <span data-navtime>9:41am</span></span><button data-contact>Hire me →</button></div>
+</div>
+
+<div class="holo" id="holo" role="dialog" aria-modal="true" aria-label="Ability card" hidden>
+  <button class="holo__x" id="holoClose"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>Close</button>
+  <div class="hc" id="hc" tabindex="0" role="img" aria-label="Ability card: full-stack 90, AI agents 88, backend and APIs 85, problem solving 82">
+    <div class="hc__aura"></div>
+    <div class="hc__in">
+      <div class="hc__face">
+        <div class="hc__frame"></div>
+        <div class="hc__top"><b>Joel</b><span>No. 0219</span></div>
+        <div class="hc__win"><img src="assets/portrait.webp" alt=""></div>
+        <p class="hc__name">Moirangthem Joel Singh<span class="hc__role">Full-Stack · AI Agents</span></p>
+        <div class="hc__stats">
+          <p class="hc__stat" style="--v:90%">Full-stack development<b>90</b><i></i></p>
+          <p class="hc__stat" style="--v:88%">AI agents<b>88</b><i></i></p>
+          <p class="hc__stat" style="--v:85%">Backend & APIs<b>85</b><i></i></p>
+          <p class="hc__stat" style="--v:82%">Problem solving<b>82</b><i></i></p>
+        </div>
+        <div class="hc__foot"><span>LeetCode 219</span><span>GfG rank 29</span></div>
+        <div class="hc__foil"></div><div class="hc__glare"></div>
+      </div>
+      <div class="hc__face hc__back">
+        <div class="hc__frame"></div>
+        <span class="hc__mono">JM</span>
+        <span class="hc__mono-sub">Builds that ship</span>
+        <div class="hc__foil"></div><div class="hc__glare"></div>
+      </div>
+    </div>
+  </div>
+  <p class="hc__hint"><span class="hc__hm">Move across the card</span><span class="hc__ht">Tilt or drag it</span> · tap to flip</p>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal__panel">
+    <button class="modal__x" id="modalClose" aria-label="Close"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <p class="modal__eye">Hire me</p>
+    <h2 id="modalTitle">Tell me what you need built.</h2>
+    <p class="modal__sub">Four quick questions. Your email app opens with everything filled in.</p>
+    <form id="hireForm" novalidate>
+      <div class="prog" aria-hidden="true"><span id="progTxt">1 of 4</span><span class="prog__bar"><i id="progBar"></i></span></div>
+      <div id="steps"></div>
+      <p class="err" id="formErr" role="alert"></p>
+      <div class="modal__nav">
+        <button type="button" class="back" id="stepBack">← Back</button>
+        <button type="submit" class="pill pill--dark pill--arrow" id="stepNext"><span class="pill__in"><span id="nextTxt">Next</span><span class="pill__badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></span></button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/content.js"></script>
+<script src="js/util.js"></script>
+<script src="js/loader.js"></script>
+<script src="js/header.js"></script>
+<script src="js/cord.js"></script>
+<script src="js/calendar.js"></script>
+<script src="js/portrait.js"></script>
+<script src="js/card.js"></script>
+<script src="js/doors.js"></script>
+<script src="js/story.js"></script>
+<script src="js/layers.js"></script>
+</body>
+</html>
