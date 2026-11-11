@@ -137,3 +137,25 @@ html[data-mode="dark"] .dinfo__p li::before{background-image:url("data:image/svg
 /* side padding copied from the reference (1.25rem / 2rem of its width-based rem), so the heading lines up exactly */
 @media (max-width:639.98px){.doors__wall.shell{padding-inline:5.5556vw}}
 @media (min-width:640px) and (max-width:1023.98px){.doors__wall.shell{padding-inline:3.125vw}}
+/* Portrait phones: copied from the reference's phone rules (its rem = 4.4444vw, so 1rem -> 4.4444vw here).
+   Info and dots sit directly under the heading, dots left-aligned, the door row follows right after. */
+@media (max-width:639.98px) and (orientation:portrait){
+  .doors{padding-top:0}
+  .doors__pin{padding-top:21.111vw}
+  .doors__wall{gap:4.444vw;align-items:stretch;height:auto}
+  .dinfo{flex-shrink:0}
+  .paint{margin:1.111vw 0 2.222vw}
+  .dinfo{margin:4vw 0 0;padding-top:4.444vw;min-height:46.667vw;text-align:left}
+  .doors.compact .dinfo{min-height:0}
+  .dinfo .dinfo__h{font-size:6.667vw;line-height:1.1;margin-bottom:1.556vw}
+  .dinfo .dinfo__t{font-size:2.778vw;letter-spacing:.08em;line-height:1.4;margin:0 0 3.778vw}
+  .dinfo .dinfo__p{margin-top:0;font-size:3.889vw;line-height:1.35;gap:2vw}
+  .dinfo .dinfo__p li{font-size:3.889vw;gap:2.667vw}
+  .dinfo .dinfo__p li::before{width:4.222vw;height:4.222vw;background-size:2.444vw}
+  .doors__dots{justify-content:flex-start;gap:1.778vw;margin:1.111vw 0 0;padding-bottom:0}
+  .doors__dots i{width:1.778vw;height:1.778vw;background:rgba(var(--fg-rgb),.2)}
+  .doors__dots i.on{width:5.778vw}
+  .doors__track{margin-top:-4.444vw;margin-inline:-5.5556vw;width:calc(100% + 11.111vw)}
+  /* reference quirk kept: its 50% resolves against the wall's content box, so the door sits 5.56vw left of centre */
+  .doors__row{padding-top:8.889vw;padding-inline:calc(50% - var(--uw) / 2 - 5.5556vw)}
+}

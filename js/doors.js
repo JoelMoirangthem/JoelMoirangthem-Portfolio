@@ -274,18 +274,24 @@
 
   /* ---------- phones: pinned wall, doors glide sideways ---------- */
   var mCur = 0, mTarget = 0, mRaf = 0, mLast = 0, snapT = 0, finger = false, swipeLock = 0, mIdx = -1;
-  function mobileLayout() {
+  function mobileLayout(again) {
     if (!mobileMq.matches) { row.style.removeProperty('--uw'); row.style.transform = sec.classList.contains('reveal') ? row.style.transform : ''; return; }
     var pin = sec.querySelector('.doors__pin'), track = row.parentNode, uw;
     if (landMq.matches) {
       var availH = pin.clientHeight - parseFloat(getComputedStyle(pin).paddingTop) - 48;
       uw = Math.max(90, Math.min(track.clientWidth * 0.62, availH / 2.25));
     } else {
-      var avail = pin.clientHeight - row.getBoundingClientRect().top + pin.getBoundingClientRect().top - 40;
-      uw = Math.max(110, Math.min(window.innerWidth * 0.6, avail / 2.25));
+      /* same rule as the reference: the door is as tall as the space from its top edge to the bottom of the screen */
+      var doorTop = row.getBoundingClientRect().top - pin.getBoundingClientRect().top + parseFloat(getComputedStyle(row).paddingTop);
+      uw = Math.max(110, Math.min(window.innerWidth * 0.6, (pin.clientHeight - doorTop - 2) / 2.25));
     }
     row.style.setProperty('--uw', uw + 'px');
-    sec.classList.toggle('compact', uw < 150);
+    /* Like the reference: decide with the checklist shown; if the door would be under 150px, hide the
+       checklist and size the door again for the space that frees up (and keep it hidden). */
+    if (!again) {
+      if (sec.classList.contains('compact')) { sec.classList.remove('compact'); return mobileLayout(); }
+      if (uw < 150) { sec.classList.add('compact'); return mobileLayout(true); }
+    }
   }
   function mProgress() {
     var r = sec.getBoundingClientRect();
@@ -341,6 +347,7 @@
   window.addEventListener('resize', function () { mobileLayout(); mKick(); if (active >= 0 && !busy) placeInfo(active); });
   mobileLayout(); mKick();
   if (mobileMq.matches) fillInfo(0);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { mobileLayout(); mKick(); });
 
   /* ---------- public: open a door from the nav, menu or footer ---------- */
   JM.openDoor = function (i) {
