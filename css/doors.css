@@ -102,7 +102,9 @@ html[data-mode="dark"] .dinfo__p li::before{background-image:url("data:image/svg
 /* ---------- phones and short landscape screens: the wall is pinned and the doors glide sideways ----------
    (keep this query identical to DOORS_COMPACT in js/doors.js) */
 @media (max-width:639.98px),(max-height:540px) and (orientation:landscape){
-  .doors{height:calc(100svh + 3 * 55svh);padding-top:2rem}
+  /* overflow:clip, not hidden: 'hidden' makes the section a scroll container, so the sticky pin
+     sticks to the section (which never scrolls) instead of the screen, and doors 3-4 scroll away. */
+  .doors{height:calc(100svh + 3 * 55svh);padding-top:2rem;overflow:clip}
   .doors__pin{position:sticky;top:0;height:100svh;padding-top:4.75rem;overflow:hidden}
   .doors__wall{align-items:stretch;gap:1.25rem;height:100%}
   .paint{font-size:9.5556vw;max-width:none;white-space:nowrap;align-self:flex-start;text-align:left;margin:.25rem 0 .5rem}
@@ -125,6 +127,7 @@ html[data-mode="dark"] .dinfo__p li::before{background-image:url("data:image/svg
 .doors__track{position:relative;width:100%}
 /* short landscape: heading and info on the left, one gliding door on the right */
 @media (max-height:540px) and (orientation:landscape){
+  .doors{padding-top:0}
   .doors__pin{padding-top:calc(var(--hdr-h,4.4rem) + .25rem)}
   .doors__wall{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto 1fr auto;column-gap:2rem;row-gap:.5rem;align-items:start;height:100%}
   .paint{grid-column:1;grid-row:1;font-size:min(calc((50vw - 3rem) / 7.9),9vh);white-space:nowrap;margin:0}

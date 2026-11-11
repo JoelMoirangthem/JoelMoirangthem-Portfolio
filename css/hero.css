@@ -62,12 +62,12 @@ html[data-mode="dark"] .fig--framed .fig__frame{box-shadow:0 0 0 .5rem rgba(196,
    The width-based layout above stacks the photo under the text, which cannot fit in ~400px of height. */
 @media (max-height:540px) and (orientation:landscape){
   .hero__content{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-content:center;gap:1rem;
-    min-height:calc(100svh - var(--bar-h));padding-top:calc(var(--hdr-h,4.5rem) + .25rem);padding-bottom:.75rem}
+    min-height:calc(100svh - var(--bar-h));padding-top:5.25rem;padding-bottom:.75rem}
   .hero__left{grid-column:1;gap:.8rem;padding-left:0}
   .h1{font-size:clamp(1.7rem,9vh,3rem)}
   .eyebrow{font-size:.8125rem}
   .hero__links{gap:.25rem 1rem}
-  .fig,.fig--framed{left:auto;right:max(1.25rem,5vw);bottom:calc(var(--bar-h) + .75rem);height:calc(100svh - var(--bar-h) - var(--hdr-h,4.5rem) - 1.5rem);transform:translateY(2.5rem)}
+  .fig,.fig--framed{left:auto;right:max(1.25rem,5vw);bottom:calc(var(--bar-h) + .75rem);height:calc(100svh - var(--bar-h) - 6.75rem);transform:translateY(2.5rem)}
   body.ready .fig{transform:none}
   .fig__card{left:-12%;bottom:6%}
 }

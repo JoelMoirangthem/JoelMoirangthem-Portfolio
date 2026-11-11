@@ -85,6 +85,19 @@ with sync_playwright() as p:
         check(ph["right"] <= w - 8, f"{tag}: doors heading runs off the screen (right {ph['right']:.0f})")
         if w < 640:
             check(ph["lines"] == 2, f"{tag}: doors heading should be 2 lines (Magic happens / behind the doors), got {ph['lines']}")
+        # phones: the wall must stay pinned while scrolling, and every one of the 4 doors must come to the centre
+        if pg.evaluate("matchMedia('(max-width:639.98px),(max-height:540px) and (orientation:landscape)').matches"):
+            top = pg.evaluate("document.querySelector('#works').getBoundingClientRect().top + scrollY")
+            span = pg.evaluate("document.querySelector('#works').offsetHeight - innerHeight")
+            for k in range(4):
+                pg.evaluate(f"(() => {{ const s = document.querySelector('#works'); window.scrollTo(0, s.getBoundingClientRect().top + scrollY + (s.offsetHeight - innerHeight) * {k} / 3); }})()")
+                pg.wait_for_timeout(1300)
+                st = pg.evaluate("""() => { const pin = document.querySelector('.doors__pin').getBoundingClientRect();
+                    const t = document.querySelector('.doors__track').getBoundingClientRect(), mid = t.left + t.width / 2;
+                    const c = [...document.querySelectorAll('.unit')].findIndex(u => { const r = u.querySelector('.doorway').getBoundingClientRect(); return r.left < mid && r.right > mid && r.bottom > 0 && r.top < innerHeight; });
+                    return { pinTop: pin.top, centred: c }; }""")
+                check(abs(st["pinTop"]) <= 2, f"{tag}: doors wall not pinned at door {k + 1} (pin top {st['pinTop']:.0f})")
+                check(st["centred"] == k, f"{tag}: door {k + 1} should be in the centre, got {st['centred'] + 1}")
         check(d["h"] <= h - d["hdr"] + 2, f"{tag}: a door ({d['h']:.0f}px) is taller than the screen below the header")
         # story header fits
         pg.evaluate("window.scrollTo(0, document.querySelector('#about').getBoundingClientRect().top + scrollY + innerHeight * .8)")
