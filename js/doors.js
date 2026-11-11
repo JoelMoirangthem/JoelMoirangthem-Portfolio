@@ -344,7 +344,8 @@
   }, { passive: true });
   mobileMq.addEventListener('change', function () { mobileLayout(); mIdx = -1; mKick(); if (!mobileMq.matches) row.style.transform = ''; });
   landMq.addEventListener('change', function () { mobileLayout(); mIdx = -1; mKick(); });
-  window.addEventListener('resize', function () { mobileLayout(); mKick(); if (active >= 0 && !busy) placeInfo(active); });
+  JM.onWidthResize(function () { mobileLayout(); mKick(); });
+  window.addEventListener('resize', function () { mKick(); if (active >= 0 && !busy) placeInfo(active); });
   mobileLayout(); mKick();
   if (mobileMq.matches) fillInfo(0);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { mobileLayout(); mKick(); });

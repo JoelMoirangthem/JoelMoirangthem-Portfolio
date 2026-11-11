@@ -44,7 +44,7 @@ html[data-mode="dark"]{
 ::view-transition-new(cal),::view-transition-new(cord){animation:none}
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{overscroll-behavior-y:none;scrollbar-width:none;font-size:16px;-webkit-font-smoothing:antialiased;background:#1A1818;overflow-x:clip}
+html{scrollbar-width:none;font-size:16px;-webkit-font-smoothing:antialiased;background:#1A1818;overflow-x:clip}
 html[data-mode="dark"]{background:#0F0E0E}
 html::-webkit-scrollbar{display:none}
 body{background:var(--background);color:var(--foreground);font-family:var(--font);overflow-x:clip}

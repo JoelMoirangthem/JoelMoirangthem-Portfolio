@@ -49,7 +49,7 @@
   fit();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
   var rt;
-  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(fit, 120); });
+  JM.onWidthResize(function () { clearTimeout(rt); rt = setTimeout(fit, 120); });
 
   function flip() {
     if (document.hidden) return setTimeout(flip, 600);

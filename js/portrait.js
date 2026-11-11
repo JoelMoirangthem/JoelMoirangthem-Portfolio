@@ -90,6 +90,6 @@
 
   if (img.complete && img.naturalWidth) size(); else img.addEventListener('load', size);
   var rt;
-  window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(size, 150); });
+  JM.onWidthResize(function () { clearTimeout(rt); rt = setTimeout(size, 150); });
   fig.addEventListener('transitionend', size, { once: true });
 })();

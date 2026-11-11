@@ -327,7 +327,7 @@
   syncAria();
 
   var rt;
-  window.addEventListener('resize', function () {
+  JM.onWidthResize(function () {
     clearTimeout(rt);
     rt = setTimeout(function () { layout(); wake(); draw(); }, 120);
   });

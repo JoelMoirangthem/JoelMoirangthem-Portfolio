@@ -111,6 +111,6 @@
   function kick() { if (!raf && visible) raf = requestAnimationFrame(drawTunnel); }
   new IntersectionObserver(function (es) { visible = es[0].isIntersecting; if (visible) { size(); kick(); } }).observe(sec);
   window.addEventListener('scroll', kick, { passive: true });
-  window.addEventListener('resize', function () { size(); kick(); });
+  JM.onWidthResize(function () { size(); kick(); });
   JM.on('mode:change', function () { setTimeout(kick, 30); });
 })();

@@ -119,6 +119,18 @@
     return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; });
   };
 
+  /* Phones fire 'resize' every time the address bar slides in or out (height only). Re-running layout,
+     re-sizing canvases (which clears them) or re-measuring then makes the page blink and jump. Layout code
+     that depends on width listens here instead. */
+  JM.onWidthResize = function (fn) {
+    var w = window.innerWidth;
+    window.addEventListener('resize', function () {
+      if (window.innerWidth === w) return;
+      w = window.innerWidth;
+      fn();
+    });
+  };
+
   JM.doorSlugFromHash = function (hash) {
     var doors = (window.JM_CONTENT && window.JM_CONTENT.doors) || [];
     for (var i = 0; i < doors.length; i++) if (doors[i].slug === hash) return i;
